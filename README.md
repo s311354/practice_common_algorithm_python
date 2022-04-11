@@ -1,4 +1,3 @@
-# practice_common_algorithm_python
 Recap Python basic algorithm
 
 #### Top-level Script Environment ####
@@ -43,11 +42,24 @@ The Python interpreter has a number of functions and types built into it that ar
 - super([type[, object-or-type]]): Return a proxy object that delegates method calls to a parent or sibling class of type. This is useful for accessing inherited methods that have been overridden in a class. The search order is same as that used by getattr() except that the type itself is skipped.
 - hasattr(object, name): The arguments are an object and a string. The result is True if the string is the name of one of the object's attributes, False if not.
 - gatattr(object, name[, default]): Return the value of the named attribute of object. name must be a string. If the string is the name of one of the object's attributes, the result is the value of that attribute.
+- enumerate(iterable, start=0): Return an enumerate object. iterable must be a sequence, an iterator, or some other object which supports iteration.
+
 
 Note:
 - super() is in the business of delegating method calls to some class in the instance's ancestor tree. For reordered method calls to work, the classes need to be designed coorperatively. 
 
 Please check the [`super.py`](./built_in_functions/super.py) for details.
+
+#### Built-in Types ####
+
+The principal built-in types are numerics, sequences, mappings, classes, instances, and expecptions.
+
+Here are most of the built-in objects considered false:
++ constants defined to be false: None and False
++ zero of any numeric type: 0, 0.0, 0j, Decimal(0), Fraction(0, 1)
++ empty sequences and collections: '', (), [], {}, set(), range(0)
+
+Operations and built-in functions that have a Boolean result always return 0 or False for false and 1 or True, unless otherwise stated.
 
 #### Data model ####
 
@@ -78,6 +90,30 @@ This module implements specialized container datatypes providing alternatives to
 - class tuple([iterable]): Tuples may be constructed in a number of ways, using a pair of parenthesses to denote the empty tuple, using a trailing comma for a singleton tuple: a, or (a,), separating items with commas: a, b, c or (a, b, c), using the tuple() built-in
 
 
+**Dictionaries can be created by several means**
+- class dict(** kwargs) dictionaries can be created by several mean:
+    - Use a comma-separated list of key: value pairs within braces: {'jack': 4098, 'sjoerd': 4227}
+    - Use a dict comprehension: {}
+    - Use the type constructor: dict()
+
+**Sets can be created by several means**
+- Use a comma-separated list of elements within braces: {'jack', 'sjoerd'}
+- Use a set comprehension: {c for c in 'abrace' if c not in 'abc'}
+- Use the type constructor: set(), set('foobar')
+
+
+#### queue - A synchronized queue class ####
+
+The queue module implements multi-producer, multi-consumer queues. It is especially useful in threaded programming when information must be exchanged safely between multiple thread. The Queue class in this module implements all the required locking semantics. The queue module defines the following classes and exceptions:
+- class queue.Queue(maxsize = 0): constructor for a FIFO queue. maxsize is an integer that sets the upperbound limit on the number of items that can be placed in the queue.
+- class queue.LifoQueue: constructor for a LIFO queue. maxsize is an integer that sets the upperbound limit on the number of items that can be placed in the queue. Insertion will bolck once this size has been reached, until queue items are consumed. If maxsize is less than or equal to zero, the queue size is infinite.
+
+
+#### sys - System-specific parameters and functions ####
+This module provides access to some variables used or maintained by the interpreter and to functions that interact strongly with the interpreter. It is always available.
+
+- sys.getsizeof(object[, default]): Return the size of an object in bytes. The object can be any type of object.
+
 
 ## Reference ##
 
@@ -95,3 +131,6 @@ This module implements specialized container datatypes providing alternatives to
 - [Simple Statements](https://docs.python.org/3.7/reference/simple_stmts.html)
 - [Dijkstra's algorithm](https://en.wikipedia.org/wiki/Dijkstra%27s_algorithm)
 - [Container Datatypes](https://docs.python.org/3.7/library/collections.html#module-collections)
+- [queue - A synchronized queue class](https://docs.python.org/3/library/queue.html?highlight=lifoqueue#queue.LifoQueue)
+- [sys - System-specific parameters and functions](https://docs.python.org/3/library/sys.html?highlight=getsizeof#sys.getsizeof)
++ [Built-in Types](https://docs.python.org/3/library/stdtypes.html)
