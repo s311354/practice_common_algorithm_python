@@ -40,6 +40,7 @@ class UnidirectedGraph(object):
         """docstring for dfs_util"""
         for u in self.get_neighbor(vertex):
             if u not in parents:
+                print(vertex, u)
                 parents[u] = vertex
                 self.dfs_util(u, parents)
 
@@ -72,6 +73,7 @@ class UnidirectedGraph(object):
 
             for neighbor in self.get_neighbor(v):
                 if neighbor not in parents:
+                    print(neighbor, v)
                     parents[neighbor] = v
                     to_visit.append(neighbor)
 
@@ -92,7 +94,7 @@ class UnidirectedGraph(object):
 
             for neighbor in self.get_neighbor(v):
                 if neighbor not in parents:
-#                     print(v, neighbor)
+                    print(v, neighbor)
                     parents[neighbor] = v
                     to_visit.put(neighbor)
 
@@ -182,7 +184,7 @@ def test_bfs():
 def test_bitpartite():
     """docstring for test_bitpartite"""
     udg = get_test_graph_1()
-#     assert(udg.is_bipartite() == False)
+    assert(udg.is_bipartite() == False)
 
     udg2 = get_test_graph_2()
     assert(udg2.is_bipartite() == True)
@@ -192,13 +194,13 @@ def main():
     """docstring for main"""
     # DFS
     test_dfs_recursive()
-    test_dfs_iterative()
+#     test_dfs_iterative()
 
     # BFS
-    test_bfs()
+#     test_bfs()
 
     # Bitpartite
-    test_bitpartite()
+#     test_bitpartite()
 
 
 if __name__ == '__main__':

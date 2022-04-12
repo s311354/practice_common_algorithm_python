@@ -21,6 +21,7 @@ class DirectedGraph(object):
         """
         if source not in self.adjacency_list:
             self.adjacency_list[source] = set()
+        # {vertex, {neighbor, ...} }
         self.adjacency_list[source].add(destination)
 
     def get_vertex(self):
@@ -126,6 +127,7 @@ class DirectedGraph(object):
 
         for vertex in self.get_vertex():
             statuses = {}
+            # BFS (queue)
             to_visit = [vertex]
 
             while to_visit and not contains_cycle:
@@ -155,6 +157,7 @@ class DirectedGraph(object):
     def topological_sort(self):
         """docstring for topological_sort"""
         """ Determines the priority of vertices to be visited.
+        " Kahn's algorithm
 
         @return:  Description
         """
@@ -258,22 +261,62 @@ def get_test_graph_1():
     dg.add_edge(5, 8)
     dg.add_edge(6, 5)
     dg.add_edge(7, 5)
-    dg.add_edge(7, 5)
 
     return dg
+
+
+def get_test_graph_2():
+    """docstring for get_test_graph_2"""
+    dg_small = DirectedGraph()
+    dg_small.add_edge(2, 1)
+    dg_small.add_edge(4, 5)
+    dg_small.add_edge(0, 1)
+    dg_small.add_edge(1, 4)
+    dg_small.add_edge(1, 3)
+
+    return dg_small
+
+
+def get_test_graph_3():
+    """docstring for get_test_graph_3"""
+    dg_other = DirectedGraph()
+    dg_other.add_edge(3, 11)
+    dg_other.add_edge(5, 2)
+    dg_other.add_edge(2, 4)
+    dg_other.add_edge(2, 7)
+    dg_other.add_edge(8, 11)
+    dg_other.add_edge(4, 7)
+    dg_other.add_edge(7, 8)
+
+    return dg_other
 
 
 def test_dfs():
     """docstring for test_dfs"""
     dg1 = get_test_graph_1()
     c1, p1 = dg1.dfs()
-    assert(c1 == {0, 3, 7})
-    assert(p1 == {1: 0, 2: 1, 4: 2, 5: 0, 6: 2, 8: 5})
+    assert(p1 == {1: 0, 5: 0, 8: 5, 2: 1, 4: 2, 6: 2})
+
+
+def test_bfs():
+    """docstring for fname"""
+    dg1 = get_test_graph_1()
+    p1 = dg1.bfs()
+    assert(p1 == {1: 0, 5: 0, 2: 1, 8: 5, 4: 2, 6: 2})
+
+## Need to understand how topological sort work
+def test_topological_sort():
+    """docstring for test_topological_sort"""
+    assert (get_test_graph_1().topological_sort() == [7, 3, 0, 1, 2, 4, 6, 5, 8] )
+#     assert (get_test_graph_2().topological_sort() == [2, 0, 1, 3, 4, 5])
+#     assert (get_test_graph_3().topological_sort() == [5, 3, 2, 4, 7, 8, 11])
 
 
 def main():
     """docstring for main"""
     test_dfs()
+    test_bfs()
+    test_topological_sort()
 
 
 if __name__ == '__main__':
