@@ -198,21 +198,15 @@ class DirectedGraph(object):
             for u in self.get_reverse_neighbor(vertex):
                 self.dfs_reverse(u, component, visited)
 
-    def scc_dfs_forward_pass(self, stack):
+    def scc_dfs_forward_pass(self):
         """docstring for scc_dfs_forward_pass"""
-        components = []
-        # class set([iterable]) : return a new set or forzenset object whose elements are taken from iterable. The elements of a set must be hashable. To represent sets of sets, the inner sets must be forzenset objects. If iterable is not specified, a new empty set is returned.
+        stack = []
         visited = set()
 
-        while stack:
-            v = stack.pop()
-            if v not in visited:
-                component = []
-                self.dfs_reverse(v, component, visited)
-                component.reverse()
-                components.append()
+        for v in self.get_vertex():
+            self.dfs_forward(v, stack, visited)
 
-        return components
+        return stack
 
     def dfs_forward(self, vertex, stack, visited):
         """docstring for dfs_forward"""
@@ -289,35 +283,3 @@ def get_test_graph_3():
     dg_other.add_edge(7, 8)
 
     return dg_other
-
-
-def test_dfs():
-    """docstring for test_dfs"""
-    dg1 = get_test_graph_1()
-    c1, p1 = dg1.dfs()
-    assert(p1 == {1: 0, 5: 0, 8: 5, 2: 1, 4: 2, 6: 2})
-
-
-def test_bfs():
-    """docstring for fname"""
-    dg1 = get_test_graph_1()
-    p1 = dg1.bfs()
-    assert(p1 == {1: 0, 5: 0, 2: 1, 8: 5, 4: 2, 6: 2})
-
-## Need to understand how topological sort work
-def test_topological_sort():
-    """docstring for test_topological_sort"""
-    assert (get_test_graph_1().topological_sort() == [7, 3, 0, 1, 2, 4, 6, 5, 8] )
-#     assert (get_test_graph_2().topological_sort() == [2, 0, 1, 3, 4, 5])
-#     assert (get_test_graph_3().topological_sort() == [5, 3, 2, 4, 7, 8, 11])
-
-
-def main():
-    """docstring for main"""
-    test_dfs()
-    test_bfs()
-    test_topological_sort()
-
-
-if __name__ == '__main__':
-    main()
