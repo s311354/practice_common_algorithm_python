@@ -114,6 +114,57 @@ This module provides access to some variables used or maintained by the interpre
 
 - sys.getsizeof(object[, default]): Return the size of an object in bytes. The object can be any type of object.
 
+#### Lambda Expressions ####
+
+Small anonymous function can be created with the lambda keyword. This function returns the sum of its two arguments: lambda a, b: a+b. Lambda functions can be used whenever function are required. They syntactically restricted to a single expression. Semantically, they are just syntactic sugar for a normal function definition.
+
+Here is the like nested function definitions
+```
+>>> def make_incrementor(n):
+...     return lambda x: x + n
+...
+>>> f = make_incrementor(42)
+>>> f(0)
+42
+>>> f(1)
+43
+```
+
+Here is another use for passing a small function as an argument:
+```
+>>> pairs = [(1, 'one'), (2, 'two'), (3, 'three'), (4, 'four')]
+>>> pairs.sort(key=lambda pair: pair[1])
+>>> pairs
+[(4, 'four'), (1, 'one'), (3, 'three'), (2, 'two')]
+```
+
+#### Unit Testing Framework ####
+
+The unittest unit testing framework was originally inspired by JUit and has a similar flavor as major unit testing framework in other language. It supports test automation, sharing of setup and shut-down code for tests. aggregation of tests into collections, and independence of the tests from the reporting framework.
+
+To achieve this, unittest supports some inportant concepts in an object-oriented way:
++ test fixture - a test fixture represents the preparation needed to perform one or more tests, and any associated cleanup actions. This may involve, for example, creating temporary or proxy databases, directories, or starting a server process.
++ test case - A test case is ths individual unit of testing. It checks for a specifc response to a particular set of inputs. unittest provides a base class, TestCase, which may be used to create new test cases.
++ test suite - A test suite is a collection of test cases, test suites, or both. It is used aggregate tests that should be executed together.
++ test runner - A test runnner is a component which orchestrates the execution of tests and provides the outcome to the user. The runner may use a graphical interface, a textual interface, or return a special value to indicate the results of executing the tests.
+
+The TestCase class provides several assert methods to check for and report failures.
+
+|  Method      |    Check that       |  New in   	|
+| ------------- |-------------  | ------- |
+|    assertEqual(a, b)    |    a == b          |        |
+|    assertNotEqual(a, b)    |    a != b          |        |
+|    assertTrue(x)    |    bool(x) is True          |        |
+|    assertFalse(x)    |    bool(x) is False          |        |
+|    assertIs(a, b)    |    a is b          |        |
+|    assertIsNot(a, b)    |    a is not b          |        |
+|    assertIsNone(x)    |    x is None          |        |
+|    assertIsNotNone(x)    |    x is not None          |        |
+|    assertIn(a, b)    |    a in b          |        |
+|    assertNotIn(a, b)    |    a not in b          |        |
+|    assertIsInstance(a, b)    |    isinstance(a, b)          |        |
+|    assertNotIsInstance(a, b)    |   not isinstance(a, b)          |        |
+
 
 ## Reference ##
 
@@ -134,3 +185,5 @@ This module provides access to some variables used or maintained by the interpre
 - [queue - A synchronized queue class](https://docs.python.org/3/library/queue.html?highlight=lifoqueue#queue.LifoQueue)
 - [sys - System-specific parameters and functions](https://docs.python.org/3/library/sys.html?highlight=getsizeof#sys.getsizeof)
 + [Built-in Types](https://docs.python.org/3/library/stdtypes.html)
++ [More Control Flow Tools](https://docs.python.org/3/tutorial/controlflow.html?highlight=lambda#more-control-flow-tools)
++ [Unit testing framework](https://docs.python.org/3/library/unittest.html?highlight=unittest#module-unittest)
