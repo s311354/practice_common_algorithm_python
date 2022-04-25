@@ -12,10 +12,6 @@ if __name__ == "__main__":
     main()
 ```
 
-#### __name__ Attributes ####
-
-The __name__ attributes must be set to the fully-qualified name of the module. This name is used to uniquely identify the module in the import system.
-
 #### String module ####
 
 The constants defined in this module:
@@ -101,6 +97,27 @@ This module implements specialized container datatypes providing alternatives to
 - Use a set comprehension: {c for c in 'abrace' if c not in 'abc'}
 - Use the type constructor: set(), set('foobar')
 
+## Factory Function for Truples with Named Fields ##
+
+Named tuple assign meaning to each position in a tuple and allow for more readable, self-documenting code. They can be used wherever regular tuples are used, and they add the ability to access fields by name instead of poistion index.
+
+```
+>>> # Basic example
+>>> Point = namedtuple('Point', ['x', 'y'])
+>>> p = Point(11, y=22)     # instantiate with positional or keyword arguments
+>>> p[0] + p[1]             # indexable like the plain tuple (11, 22)
+33
+```
+
+Named tuples are especially useful for assigning field names to result tuples returned by the csv modules:
+
+```
+EmployeeRecord = namedtuple('EmployeeRecord', 'name, age, title, department, paygrade')
+
+import csv
+for emp in map(EmployeeRecord._make, csv.reader(open("employees.csv", "rb"))):
+    print(emp.name, emp.title)
+```
 
 #### queue - A synchronized queue class ####
 
@@ -166,6 +183,22 @@ The TestCase class provides several assert methods to check for and report failu
 |    assertNotIsInstance(a, b)    |   not isinstance(a, b)          |        |
 
 
+#### Higher-order Functions and Operations on callable Objects ####
+
+@functools.lru_cache(user_function): least recently used cache
+
+Decorator to wrap a function with a memoizinf callable that saves up to the maxsize most recent calls. It can save time when expensive or I/Q bound function is periodically called with the same arguments.
+
+Since a dictionary is used to cache results, the positional and keyword arguments to the function must be hashable.
+
+Distinct arguments patterns may be considered to be distinct calls with separate cache entries.
+
+
+#### Function Annotations ####
+
+
+
+
 ## Reference ##
 
 - [Automatic documentation generation from code](https://www.sphinx-doc.org/en/master/tutorial/automatic-doc-generation.html)
@@ -187,3 +220,5 @@ The TestCase class provides several assert methods to check for and report failu
 + [Built-in Types](https://docs.python.org/3/library/stdtypes.html)
 + [More Control Flow Tools](https://docs.python.org/3/tutorial/controlflow.html?highlight=lambda#more-control-flow-tools)
 + [Unit testing framework](https://docs.python.org/3/library/unittest.html?highlight=unittest#module-unittest)
++ [functools - Higher-order functions and operations on callable objects](https://docs.python.org/3/library/functools.html#functools.lru_cache)
++ [PEP 3107 – Function Annotations](https://peps.python.org/pep-3107/)
