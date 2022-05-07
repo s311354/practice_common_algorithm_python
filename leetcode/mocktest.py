@@ -14,6 +14,14 @@ class SolutionCase(unittest.TestCase):
     A :class:`~leetcode.mocktest.SolutionCase` object is the unittest module.
 
     This module can construct and run tests by using assertEqual(a, b) assert methods to check for and report failures.
+
+    If the unittest unit testing framework is correct, then the script produces an output that looks like this:
+
+    >>> $ python3 mocktest.py
+    ----------------------------------------------------------------------
+    Ran 2 tests in 1.314s
+
+
     """
 
     def test_twoSum(self):
