@@ -1,11 +1,36 @@
+"""
+Use the Solution class to represent Leedcode problems
+"""
+
 from typing import List
 import collections
 from functools import lru_cache
 
 
-class Solution:
+class Solution(object):
+    """
+    A :class:`~leetcode.impl.solution` object is the leetcode quiz module
+
+    This module is to implementate the leetcode problems
+    """
+
     def twoSum(self, nums: List[int], target: int) -> List[int]:
-        """ docstring for 1. twoSum """
+        """ Two Sum
+
+        Given an array of integers nums and an integer target, return indices of the two numbers such that they add up to target.
+        You may assume that each input would have exactly one solution, and you may not use the same element twice.
+        You can return the answer in any order.
+
+        :param num:  array of integers
+        :type  num:  List[int]
+        :param target:  integer target
+        :type  target:  int
+
+        :return:  indices of the two numbers such that they add up to target
+        :rtype:   List[int]
+
+        """
+
         store = dict()
         for i in range(len(nums)):
             sec = target - nums[i]
@@ -24,11 +49,6 @@ class Solution:
         return ones
 
     def combinations(self, number: int, k: int) -> List[int]:
-        """
-        :param number: a number that will be treated in binary form
-        :param k: number of ones in the result integers
-        :return: a list of integers with no more than k 1s
-        """
 
         def helper(current_number: int, num_ones: int, remain_1s: int) -> List[int]:
             if remain_1s == 0:
@@ -50,6 +70,25 @@ class Solution:
         return helper(current_number=number, num_ones=self.count1(number), remain_1s=k)
 
     def minNumberOfSemesters(self, n: int, dependencies: List[List[int]], k: int) -> int:
+        """ Parallel Courses II
+
+        You are given an integer n, which indicates that there are n courses labeled from 1 to n. You are also given an array relations where relations[i] = [prevCoursei, nextCoursei], representing a prerequisite relationship between course prevCoursei and course nextCoursei: course prevCoursei has to be taken before course nextCoursei. Also, you are given the integer k.
+
+        In one semester, you can take at most k courses as long as you have taken all the prerequisites in the previous semesters for the courses you are taking.
+
+        Return the minimum number of semesters needed to take all courses. The testcases will be generated such that it is possible to take every course.
+
+        :param n:  courses
+        :type n:  int
+        :param dependencies: prerequisite relationship between course prevCoursei and course nextCoursei has to be taken before course nextCoursei
+        :type dependencies:  List[List[int]]
+        :param k:  take at most k courses
+        :type  k:  int
+
+        :return:  minimum number of semesters needed to take all courses
+        :rtype:  int
+
+        """
 
         # Compute in-degree and adjacency graph for each node
         in_degree = [0] * n
