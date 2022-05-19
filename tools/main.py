@@ -12,7 +12,8 @@ def main():
     receiver = prompt("To: ").split()[0]
     password = prompt("Password: ").split()[0]
 
-    TextMeWhenItsDone().TextMe(email, password, receiver)
+    TextMeWhenItsDone(email).TextMe(email, password, receiver)
+    TextMeWhenItsDone(email).TextMeImage(email, password, receiver)
 
 
 if __name__ == '__main__':
